@@ -13,6 +13,8 @@
 		6DA323972A49FD0600F9D088 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DA323952A49FD0600F9D088 /* Main.storyboard */; };
 		6DA323992A49FD0700F9D088 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DA323982A49FD0700F9D088 /* Assets.xcassets */; };
 		6DA3239C2A49FD0700F9D088 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DA3239A2A49FD0700F9D088 /* LaunchScreen.storyboard */; };
+		6DD1133F2A4C6D730030F690 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD1133E2A4C6D730030F690 /* Character.swift */; };
+		6DD113412A4ECD8F0030F690 /* characterInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD113402A4ECD8F0030F690 /* characterInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		6DA323982A49FD0700F9D088 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6DA3239B2A49FD0700F9D088 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6DA3239D2A49FD0700F9D088 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6DD1133E2A4C6D730030F690 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		6DD113402A4ECD8F0030F690 /* characterInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = characterInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				6DA323982A49FD0700F9D088 /* Assets.xcassets */,
 				6DA3239A2A49FD0700F9D088 /* LaunchScreen.storyboard */,
 				6DA3239D2A49FD0700F9D088 /* Info.plist */,
+				6DD1133E2A4C6D730030F690 /* Character.swift */,
+				6DD113402A4ECD8F0030F690 /* characterInfoViewController.swift */,
 			);
 			path = lab4;
 			sourceTree = "<group>";
@@ -141,6 +147,8 @@
 				6DA323942A49FD0600F9D088 /* ViewController.swift in Sources */,
 				6DA323902A49FD0600F9D088 /* AppDelegate.swift in Sources */,
 				6DA323922A49FD0600F9D088 /* SceneDelegate.swift in Sources */,
+				6DD1133F2A4C6D730030F690 /* Character.swift in Sources */,
+				6DD113412A4ECD8F0030F690 /* characterInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
