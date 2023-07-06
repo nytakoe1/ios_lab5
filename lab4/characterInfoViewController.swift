@@ -21,7 +21,7 @@ final class characterInfoViewController: UIViewController{
     
     var delegate : characterInfoViewControllerDelegate?
     
-    var data : CharacterData?{
+    var data : CharacterModel?{
         didSet{
             guard let data else {return }
             setUpData(character: data)
@@ -38,20 +38,18 @@ final class characterInfoViewController: UIViewController{
     @IBOutlet weak var genderLabel: UITextView!
     
     @IBAction func speciesButton(_ sender: Any) {
-//        delegate?.changeLocation(with: data!.id)
+
         let alert = UIAlertController(title: "Enter New Value", message: nil, preferredStyle: .alert)
         alert.addTextField { (textField) in textField.placeholder = "Spicies"}
         let doneAction = UIAlertAction(title: "Done", style: .default, handler: {_ in if let newSpicies = alert.textFields?.first?.text{self.spiciesLabel.text = newSpicies
             guard let myData =  self.data else {return}
             self.delegate?.changeSpicices(with: myData.id, and: newSpicies)
-            
         }
 
         })
         alert.addAction(doneAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(cancelAction)
-
         present(alert, animated: true, completion: nil)
         
     }
@@ -69,7 +67,7 @@ final class characterInfoViewController: UIViewController{
         present(alert, animated: true, completion: nil)
     }
     
-    private func setUpData (character : CharacterData){
+    private func setUpData (character : CharacterModel){
         idLabel.text = String(character.id)
         idLabel.textColor = .white
         
@@ -79,16 +77,17 @@ final class characterInfoViewController: UIViewController{
         spiciesLabel.text = character.species
         spiciesLabel.textColor = .white
         
-        locationLabel.text = character.location
+        locationLabel.text = character.location.name
         locationLabel.textColor = .white
         
-        genderLabel.text = "female"
+        genderLabel.text = character.gender
         genderLabel.textColor = .white
         
-        statusLabel.text = "alive"
+        statusLabel.text = character.status
         statusLabel.textColor = .white
         
-        characterImage.image = UIImage(named: character.image)
+        characterImage.download(from: character.image)
+//        characterImage.image = UIImage(named: character.image)
         
     }
 }

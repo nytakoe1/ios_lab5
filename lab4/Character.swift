@@ -55,7 +55,7 @@ class Character: UITableViewCell {
         
     }
     
-    func setUpData (character : CharacterData){
+    func setUpData (character : CharacterModel){
         IDLabel.text = String(character.id)
         IDLabel.textColor = .white
         
@@ -65,7 +65,7 @@ class Character: UITableViewCell {
         speciesLabel.text = character.species
         speciesLabel.textColor = .white
         
-        locationLabel.text = character.location
+        locationLabel.text = character.location.name
         locationLabel.textColor = .white
         
         genderLabel.text = String (describing: character.gender)
@@ -74,7 +74,8 @@ class Character: UITableViewCell {
         statusLabel.text = String(describing: character.status)
         statusLabel.textColor = .white
         
-        characterImage.image = UIImage(named: character.image)
+        characterImage.download(from: character.image)
+//        characterImage.image = UIImage(named: character.image)
         
     }
     
@@ -90,3 +91,4 @@ class Character: UITableViewCell {
     }
 
 }
+

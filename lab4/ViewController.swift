@@ -11,15 +11,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var CharacterView: UITableView!
     
-    private var data : [CharacterData] = [
-        CharacterData(id: 2, name: "Morty Smith", status: CharacterData.Status.alive, species: "Human", gender: CharacterData.Gender.male, location: "Citadel of Ricks", image: "rm1.jpeg"),
-        CharacterData(id: 11, name: "Albert Einstein", status: CharacterData.Status.dead, species: "Human", gender: CharacterData.Gender.male, location: "Earth (Replacement Dimension)", image: "11"),
-        CharacterData(id: 15, name: "Alien Rick", status: CharacterData.Status.unknown, species: "Alien", gender: CharacterData.Gender.male, location: "Citadel of Ricks", image: "15"),
-        CharacterData(id: 33, name: "Beebo", status: CharacterData.Status.dead, species: "Alien", gender: CharacterData.Gender.male, location: "Venzenulon 7", image: "33"),
-        CharacterData(id: 41, name: "ig Boobed Waitress", status: CharacterData.Status.alive, species: "Mythological Creature", gender: CharacterData.Gender.female, location: "Fantasy World", image: "41"),
-        CharacterData(id: 44, name: "Body Guard Morty", status: CharacterData.Status.dead, species: "Human", gender: CharacterData.Gender.male, location: "Citadel of Ricks", image: "44"),
-        CharacterData(id: 47, name: "Birdperson", status: CharacterData.Status.alive, species: "Alien", gender: CharacterData.Gender.male, location: "Planet Squanch", image: "47.jpeg"),
-    ]
+    private var characters : [CharacterModel] = []
+    private let networkManager: NetworkManager = NetworkManager()
+    
+
+    private func loadCharacter(byId: Int) {
+        networkManager.fetchCharacter(characterID : byId, completion: { [weak self]
+            result in
+            guard let weakSelf = self else { return }
+            switch result {
+            case .success(let characterResponse):
+                weakSelf.characters.append(characterResponse)
+                weakSelf.CharacterView.reloadData()
+            case let .failure(error):
+                print(error)
+            }
+        })
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +36,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         CharacterView.dataSource = self
         CharacterView.backgroundColor = .clear
         CharacterView.separatorColor = .white
+        
+        for currentID in 1 ... 20{
+            loadCharacter(byId: currentID)
+        }
     }
     //MARK: - tableViewDelegate
     
@@ -35,18 +48,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         guard let characterInfoView = storyboard?.instantiateViewController(identifier: "characterInfoViewController") as? characterInfoViewController else {return }
         characterInfoView.delegate = self
         present(characterInfoView, animated: true)
-        characterInfoView.data = data[indexPath.row]
+        characterInfoView.data = characters[indexPath.row]
     }
     
     //MARK: - tableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.count
+        characters.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let characterCell = tableView.dequeueReusableCell(withIdentifier: "Character") as? Character else {return UITableViewCell()}
-        let dataCell = data[indexPath.row]
+        let dataCell = characters[indexPath.row]
         characterCell.setUpData(character: dataCell)
         
 
@@ -59,22 +72,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 extension ViewController : characterInfoViewControllerDelegate{
     
     func changeLocation(with id: Int, and newLocation: String) {
-        if let index = data.firstIndex(where: {$0.id == id}){
-            data[index].location = newLocation
+        if let index = characters.firstIndex(where: {$0.id == id}){
+            characters[index].location.name = newLocation
             CharacterView.reloadData()
         }
     }
     
     func changeSpicices(with id: Int, and newSpicies: String) {
-        if let index = data.firstIndex(where: {$0.id == id}){
-            data[index].species = newSpicies
+        if let index = characters.firstIndex(where: {$0.id == id}){
+            characters[index].species = newSpicies
             CharacterView.reloadData()
         }
     }
-    
-    
-    
-
-    
-    
 }
